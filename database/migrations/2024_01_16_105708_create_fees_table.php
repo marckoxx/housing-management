@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('description', 50);
             $table->decimal('defAmount',10,2);
-            $table->date('dateOfSetting');
             $table->boolean('isCurrent');
             $table->string('paymentName');
             $table->timestamps();

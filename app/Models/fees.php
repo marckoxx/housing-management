@@ -12,7 +12,6 @@ class fees extends Model
     protected $fillable = [
         'description',
         'defAmount',
-        'dateOfSetting',
         'isCurrent',
         'paymentName'
     ];

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\feescontroller;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -23,15 +25,11 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/admin/brands', function () {
-    return Inertia::render('admin/brands/index');
-});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -39,6 +37,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::resource('/admin/fees', feescontroller::class);
+Route::resource('/admin/users', UserController::class);
+
+
+Route::get('/admin/dashboard', function () {
+    return Inertia::render('admin/dashboard');
+})->name('admindash');
 
 
 require __DIR__.'/auth.php';

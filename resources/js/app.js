@@ -11,16 +11,27 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import { md3 } from 'vuetify/blueprints'
+import colors from 'vuetify/util/colors'
 
 const vuetify = createVuetify({
   components,
   directives,
+  blueprint: md3,
+  theme: {
+    defaultTheme: 'dark',
+    themes: {
+      light: {
+        primary: colors.blue,
+      },
+    },
+  },
 })
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
-    title: (title) => `${title} - ${appName}`,
+    title: (title) => `${title} | ${appName}`,
     resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
